@@ -1,5 +1,3 @@
-// lib/views/stock_history_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +21,6 @@ class StockHistoryScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          // Product Summary Card
           Card(
             margin: const EdgeInsets.all(16),
             elevation: 3,
@@ -105,7 +102,6 @@ class StockHistoryScreen extends ConsumerWidget {
               ),
             ),
           ),
-          // History List
           Expanded(
             child: stockHistoryAsync.when(
               data: (history) {

@@ -40,7 +40,6 @@ class ProductRepository {
       final updatedProduct = product.copyWith(currentStock: newStock);
       await _dbHelper.updateProduct(updatedProduct);
 
-      // Record in history (bonus feature)
       final history = StockHistory(
         productId: productId,
         changeAmount: changeAmount,

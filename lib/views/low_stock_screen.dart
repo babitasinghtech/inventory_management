@@ -1,5 +1,3 @@
-// lib/views/low_stock_screen.dart
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,7 +59,6 @@ class LowStockScreen extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // Summary Card
               Card(
                 color: Colors.orange[50],
                 elevation: 3,
@@ -109,8 +106,6 @@ class LowStockScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 24),
-
-              // Out of Stock Section
               if (outOfStockProducts.isNotEmpty) ...[
                 const Text(
                   'Out of Stock',
@@ -130,8 +125,6 @@ class LowStockScreen extends ConsumerWidget {
                     )),
                 const SizedBox(height: 24),
               ],
-
-              // Low Stock Section
               const Text(
                 'Low Stock (< 10)',
                 style: TextStyle(
@@ -184,7 +177,6 @@ class LowStockScreen extends ConsumerWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // Product Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: product.imagePath != null
@@ -198,7 +190,6 @@ class LowStockScreen extends ConsumerWidget {
                     : _buildPlaceholder(),
               ),
               const SizedBox(width: 16),
-              // Product Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,7 +247,6 @@ class LowStockScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              // Quick Restock Button
               IconButton(
                 onPressed: () {
                   Navigator.push(

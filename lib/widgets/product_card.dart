@@ -27,7 +27,6 @@ class ProductCard extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // Product Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: product.imagePath != null
@@ -41,7 +40,6 @@ class ProductCard extends StatelessWidget {
                     : _buildPlaceholder(),
               ),
               const SizedBox(width: 16),
-              // Product Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +91,6 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Delete Button
               IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: onDelete,

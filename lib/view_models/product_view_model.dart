@@ -3,12 +3,10 @@ import '../models/product.dart';
 import '../models/stock_history.dart';
 import '../repositories/product_repository.dart';
 
-// Repository Provider
 final productRepositoryProvider = Provider<ProductRepository>((ref) {
   return ProductRepository();
 });
 
-// Product List State Notifier
 class ProductListNotifier extends StateNotifier<AsyncValue<List<Product>>> {
   final ProductRepository _repository;
 
@@ -81,7 +79,6 @@ class ProductListNotifier extends StateNotifier<AsyncValue<List<Product>>> {
   }
 }
 
-// Provider for Product List
 final productListProvider =
     StateNotifierProvider<ProductListNotifier, AsyncValue<List<Product>>>((
   ref,
@@ -90,7 +87,6 @@ final productListProvider =
   return ProductListNotifier(repository);
 });
 
-// Provider for Stock History (Bonus)
 final stockHistoryProvider = FutureProvider.family<List<StockHistory>, String>((
   ref,
   productId,
@@ -99,10 +95,8 @@ final stockHistoryProvider = FutureProvider.family<List<StockHistory>, String>((
   return await repository.getProductHistory(productId);
 });
 
-// Search Query Provider
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
-// Filtered Products Provider
 final filteredProductsProvider = Provider<AsyncValue<List<Product>>>((ref) {
   final productsAsync = ref.watch(productListProvider);
   final searchQuery = ref.watch(searchQueryProvider);

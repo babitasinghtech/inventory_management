@@ -1,5 +1,3 @@
-// lib/views/stock_update_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -18,7 +16,7 @@ class StockUpdateScreen extends ConsumerStatefulWidget {
 class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
   final _quantityController = TextEditingController();
   final _notesController = TextEditingController();
-  String _operationType = 'in'; // 'in' or 'out'
+  String _operationType = 'in';
   bool _isLoading = false;
 
   @override
@@ -107,7 +105,6 @@ class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Product Info Card
                   Card(
                     elevation: 3,
                     child: Padding(
@@ -157,7 +154,6 @@ class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Operation Type Selection
                   const Text(
                     'Operation Type',
                     style: TextStyle(
@@ -188,7 +184,6 @@ class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  // Quantity Input
                   TextFormField(
                     controller: _quantityController,
                     decoration: InputDecoration(
@@ -225,7 +220,6 @@ class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
                     keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 16),
-                  // Notes (Optional)
                   TextFormField(
                     controller: _notesController,
                     decoration: const InputDecoration(
@@ -237,7 +231,6 @@ class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
                     maxLines: 3,
                   ),
                   const SizedBox(height: 24),
-                  // Preview Card
                   if (_quantityController.text.isNotEmpty &&
                       int.tryParse(_quantityController.text) != null)
                     Card(
@@ -309,7 +302,6 @@ class _StockUpdateScreenState extends ConsumerState<StockUpdateScreen> {
                       ),
                     ),
                   const SizedBox(height: 24),
-                  // Update Button
                   ElevatedButton(
                     onPressed: _updateStock,
                     style: ElevatedButton.styleFrom(

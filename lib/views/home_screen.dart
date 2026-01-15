@@ -1,5 +1,3 @@
-// lib/views/home_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../view_models/product_view_model.dart';
@@ -65,7 +63,6 @@ class HomeScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          // Search Bar
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
@@ -91,7 +88,6 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
           ),
-          // Product List
           Expanded(
             child: productsAsync.when(
               data: (products) {

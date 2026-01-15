@@ -17,7 +17,6 @@ class Product {
     required this.addedBy,
   });
 
-  // Convert to Map for database storage
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -30,7 +29,6 @@ class Product {
     };
   }
 
-  // Create Product from Map
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id'] as String,
@@ -43,7 +41,6 @@ class Product {
     );
   }
 
-  // Copy with method for updates
   Product copyWith({
     String? name,
     String? description,

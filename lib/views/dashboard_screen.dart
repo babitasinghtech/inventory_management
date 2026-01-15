@@ -38,7 +38,6 @@ class DashboardScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Welcome Card
                   Card(
                     elevation: 4,
                     shape: RoundedRectangleBorder(
@@ -78,8 +77,6 @@ class DashboardScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Statistics Grid
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -115,8 +112,6 @@ class DashboardScreen extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-
-                  // Additional Stats
                   Card(
                     elevation: 2,
                     child: Padding(
@@ -160,8 +155,6 @@ class DashboardScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Quick Actions
                   const Text(
                     'Quick Actions',
                     style: TextStyle(
@@ -196,8 +189,6 @@ class DashboardScreen extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-
-                  // Low Stock Alert
                   if (lowStock > 0)
                     Card(
                       color: Colors.orange[50],

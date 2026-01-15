@@ -32,12 +32,10 @@ class _QRScannerScreenState extends ConsumerState<QRScannerScreen> {
 
     setState(() => _isProcessing = true);
 
-    // Search for product by ID
     final products =
         await ref.read(productListProvider.notifier).searchProducts(code);
 
     if (products.isNotEmpty && mounted) {
-      // Product found
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -45,7 +43,6 @@ class _QRScannerScreenState extends ConsumerState<QRScannerScreen> {
         ),
       );
     } else if (mounted) {
-      // Product not found
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('No product found with ID: $code')),
       );

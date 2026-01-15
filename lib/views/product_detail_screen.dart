@@ -1,5 +1,3 @@
-// lib/views/product_detail_screen.dart
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,7 +42,6 @@ class ProductDetailScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Product Image
             if (product.imagePath != null)
               Image.file(
                 File(product.imagePath!),
@@ -54,13 +51,11 @@ class ProductDetailScreen extends ConsumerWidget {
               )
             else
               _buildPlaceholder(),
-
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product Name
                   Text(
                     product.name,
                     style: const TextStyle(
@@ -69,7 +64,6 @@ class ProductDetailScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // Product ID
                   Text(
                     'ID: ${product.id}',
                     style: TextStyle(
@@ -79,7 +73,6 @@ class ProductDetailScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Description
                   const Text(
                     'Description',
                     style: TextStyle(
@@ -93,7 +86,6 @@ class ProductDetailScreen extends ConsumerWidget {
                     style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 24),
-                  // Quick Action Buttons
                   Row(
                     children: [
                       Expanded(
@@ -142,7 +134,6 @@ class ProductDetailScreen extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  // Stock Control
                   StockControlWidget(
                     currentStock: product.currentStock,
                     onIncrement: () async {
@@ -169,7 +160,6 @@ class ProductDetailScreen extends ConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 24),
-                  // Metadata
                   _buildInfoRow('Added By', product.addedBy),
                   const SizedBox(height: 8),
                   _buildInfoRow(
@@ -178,7 +168,6 @@ class ProductDetailScreen extends ConsumerWidget {
                         .format(product.timestamp),
                   ),
                   const SizedBox(height: 24),
-                  // Stock History (Bonus Feature)
                   const Text(
                     'Stock History',
                     style: TextStyle(

@@ -24,7 +24,6 @@ class DatabaseHelper {
   }
 
   Future<void> _createDB(Database db, int version) async {
-    // Products table
     await db.execute('''
       CREATE TABLE products (
         id TEXT PRIMARY KEY,
@@ -37,7 +36,6 @@ class DatabaseHelper {
       )
     ''');
 
-    // Stock history table (bonus feature)
     await db.execute('''
       CREATE TABLE stock_history (
         historyId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,7 +49,6 @@ class DatabaseHelper {
     ''');
   }
 
-  // CRUD Operations for Products
   Future<void> insertProduct(Product product) async {
     final db = await database;
     await db.insert(
@@ -87,7 +84,7 @@ class DatabaseHelper {
   Future<void> deleteProduct(String id) async {
     final db = await database;
     await db.delete('products', where: 'id = ?', whereArgs: [id]);
-    // Also delete associated history
+
     await db.delete('stock_history', where: 'productId = ?', whereArgs: [id]);
   }
 
@@ -101,7 +98,6 @@ class DatabaseHelper {
     return List.generate(maps.length, (i) => Product.fromMap(maps[i]));
   }
 
-  // Stock History Operations (Bonus)
   Future<void> insertStockHistory(StockHistory history) async {
     final db = await database;
     await db.insert('stock_history', history.toMap());

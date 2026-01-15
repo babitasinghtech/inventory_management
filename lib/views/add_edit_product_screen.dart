@@ -91,7 +91,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
     setState(() => _isLoading = true);
 
     try {
-      // Validate unique ID for new products
       if (widget.product == null) {
         final isUnique = await ref
             .read(productListProvider.notifier)
@@ -112,7 +111,7 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
         currentStock: int.parse(_stockController.text),
         imagePath: _imagePath,
         timestamp: widget.product?.timestamp ?? DateTime.now(),
-        addedBy: 'Admin', // Hardcoded username
+        addedBy: 'Admin',
       );
 
       if (widget.product == null) {
@@ -157,7 +156,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Image Preview
                     GestureDetector(
                       onTap: _showImageSourceDialog,
                       child: Container(
@@ -193,7 +191,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    // Product ID
                     TextFormField(
                       controller: _idController,
                       enabled: !isEdit,
@@ -218,7 +215,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    // Product Name
                     TextFormField(
                       controller: _nameController,
                       decoration: const InputDecoration(
@@ -234,7 +230,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    // Description
                     TextFormField(
                       controller: _descController,
                       decoration: const InputDecoration(
@@ -251,7 +246,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    // Stock
                     TextFormField(
                       controller: _stockController,
                       decoration: const InputDecoration(
@@ -274,7 +268,6 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                       },
                     ),
                     const SizedBox(height: 32),
-                    // Save Button
                     ElevatedButton(
                       onPressed: _saveProduct,
                       style: ElevatedButton.styleFrom(

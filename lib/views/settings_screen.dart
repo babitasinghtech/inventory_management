@@ -1,5 +1,3 @@
-// lib/views/settings_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/database_helper.dart';
@@ -18,7 +16,6 @@ class SettingsScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // App Info Section
           _buildSectionHeader('App Information'),
           _buildInfoCard(
             icon: Icons.info_outline,
@@ -39,8 +36,6 @@ class SettingsScreen extends ConsumerWidget {
             color: Colors.purple,
           ),
           const SizedBox(height: 24),
-
-          // Features Section
           _buildSectionHeader('Features'),
           _buildFeatureCard(
             icon: Icons.inventory_2,
@@ -67,8 +62,6 @@ class SettingsScreen extends ConsumerWidget {
             color: Colors.cyan,
           ),
           const SizedBox(height: 24),
-
-          // Database Management Section
           _buildSectionHeader('Database Management'),
           Card(
             child: ListTile(
@@ -82,8 +75,6 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 24),
-
-          // About Section
           _buildSectionHeader('About'),
           Card(
             child: Padding(
@@ -235,9 +226,8 @@ class SettingsScreen extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () async {
-              // Close database and delete
               await DatabaseHelper.instance.close();
-              // In a real app, you'd delete the database file here
+
               Navigator.pop(ctx);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
