@@ -1,3 +1,5 @@
+// lib/views/product_detail_screen.dart
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +8,8 @@ import '../models/product.dart';
 import '../view_models/product_view_model.dart';
 import '../widgets/stock_control_widget.dart';
 import 'add_edit_product_screen.dart';
+import 'stock_update_screen.dart';
+import 'stock_history_screen.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
   final Product product;
@@ -78,12 +82,64 @@ class ProductDetailScreen extends ConsumerWidget {
                   // Description
                   const Text(
                     'Description',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     product.description,
                     style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 24),
+                  // Quick Action Buttons
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    StockUpdateScreen(product: product),
+                              ),
+                            );
+                            if (result == true) {
+                              ref.invalidate(stockHistoryProvider(product.id));
+                            }
+                          },
+                          icon: const Icon(Icons.add_shopping_cart),
+                          label: const Text('Update Stock'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    StockHistoryScreen(product: product),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.history),
+                          label: const Text('View History'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.blue,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   // Stock Control
@@ -118,15 +174,17 @@ class ProductDetailScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildInfoRow(
                     'Added On',
-                    DateFormat(
-                      'MMM dd, yyyy - hh:mm a',
-                    ).format(product.timestamp),
+                    DateFormat('MMM dd, yyyy - hh:mm a')
+                        .format(product.timestamp),
                   ),
                   const SizedBox(height: 24),
                   // Stock History (Bonus Feature)
                   const Text(
                     'Stock History',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   stockHistoryAsync.when(
@@ -161,15 +219,13 @@ class ProductDetailScreen extends ConsumerWidget {
                                 ),
                               ),
                               subtitle: Text(
-                                DateFormat(
-                                  'MMM dd, yyyy - hh:mm a',
-                                ).format(item.timestamp),
+                                DateFormat('MMM dd, yyyy - hh:mm a')
+                                    .format(item.timestamp),
                               ),
                               trailing: Text(
                                 'Stock: ${item.stockAfterChange}',
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           );
@@ -204,12 +260,18 @@ class ProductDetailScreen extends ConsumerWidget {
       children: [
         Text(
           '$label: ',
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         Expanded(
           child: Text(
             value,
-            style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[700],
+            ),
           ),
         ),
       ],

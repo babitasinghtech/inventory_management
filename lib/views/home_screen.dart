@@ -1,3 +1,5 @@
+// lib/views/home_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../view_models/product_view_model.dart';
@@ -5,6 +7,8 @@ import '../widgets/product_card.dart';
 import 'add_edit_product_screen.dart';
 import 'product_detail_screen.dart';
 import 'qr_scanner_screen.dart';
+import 'dashboard_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,14 +26,40 @@ class HomeScreen extends ConsumerWidget {
         elevation: 2,
         actions: [
           IconButton(
+            icon: const Icon(Icons.dashboard),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const DashboardScreen(),
+                ),
+              );
+            },
+            tooltip: 'Dashboard',
+          ),
+          IconButton(
             icon: const Icon(Icons.qr_code_scanner),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const QRScannerScreen()),
+                MaterialPageRoute(
+                  builder: (_) => const QRScannerScreen(),
+                ),
               );
             },
             tooltip: 'Scan QR Code',
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SettingsScreen(),
+                ),
+              );
+            },
+            tooltip: 'Settings',
           ),
         ],
       ),
@@ -118,7 +148,9 @@ class HomeScreen extends ConsumerWidget {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) => Center(child: Text('Error: $error')),
+              error: (error, stack) => Center(
+                child: Text('Error: $error'),
+              ),
             ),
           ),
         ],
@@ -127,7 +159,9 @@ class HomeScreen extends ConsumerWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const AddEditProductScreen()),
+            MaterialPageRoute(
+              builder: (_) => const AddEditProductScreen(),
+            ),
           );
         },
         icon: const Icon(Icons.add),
@@ -138,10 +172,7 @@ class HomeScreen extends ConsumerWidget {
   }
 
   void _showDeleteDialog(
-    BuildContext context,
-    WidgetRef ref,
-    String productId,
-  ) {
+      BuildContext context, WidgetRef ref, String productId) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
